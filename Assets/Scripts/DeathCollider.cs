@@ -13,7 +13,7 @@ public class DeathCollider : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D other)
 	{
         if (other.tag.Equals(Constants.PLAYER_TAG)) {
-            DeathEvent.EmitPlayer();
+            DeathEvent.EmitPlayerGeneral();
         }
 	}
 }

@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour {
 	void Start () 
     {
         DeathEvent.ListenForPlayerDeathEvent(Die);
+        DeathEvent.ListenForPlayerFallingEvent(DieByFalling);
         cameraMain = Camera.main;
 		rigidbody = GetComponent<Rigidbody2D>();
 		collider = GetComponent<BoxCollider2D>();
@@ -58,12 +59,18 @@ public class PlayerController : MonoBehaviour {
         animator.SetFloat(Constants.PLAYER_ANIMATION_SPEED, speed);
     }
 
-    private void Die(Hashtable h) {
-        PlayDeathAnimation();
+    private void Die(Hashtable h) 
+    {
         DeathEvent.EmitForGameManager();
     }
 
-    private void PlayDeathAnimation() {
-        Debug.Log("Playing death animation in player");
+    private void DieByFalling(Hashtable h)
+    {
+        PlayFallingDeathAnimation();
+        DeathEvent.EmitForGameManager();
+    }
+
+    private void PlayFallingDeathAnimation() {
+        Debug.Log("Playing falling death animation in player");
     }
 }
