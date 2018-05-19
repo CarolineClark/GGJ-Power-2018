@@ -1,15 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LightController : MonoBehaviour {
     public float maxLight = 10f;
     public float minLight = 0f;
     public float simpleLightStep = 0.05f;
+    public float torchIntensityRadiusRatio = 0.05f;
+
     private Light torch;
+    private CircleCollider2D triggerCollider;
 
 	void Start () {
         torch = GetComponent<Light>();
+        triggerCollider = GetComponent<CircleCollider2D>();
 	}
 	
 	void Update () 
@@ -17,7 +19,7 @@ public class LightController : MonoBehaviour {
         SimpleTorch();
 	}
 
-    void SimpleTorch() 
+    private void SimpleTorch() 
     {
         if (Input.GetKey(KeyCode.L)) 
         {
@@ -27,16 +29,21 @@ public class LightController : MonoBehaviour {
         {
             DimLight();
         }
-
+        UpdateTriggerColliderSize();
     }
 
-    void IncreaseLight() 
+    private void IncreaseLight() 
     {
         torch.intensity = Mathf.Min(torch.intensity + simpleLightStep * Time.deltaTime, maxLight);
     }
 
-    void DimLight()
+    private void DimLight()
     {
         torch.intensity = Mathf.Max(torch.intensity - simpleLightStep * Time.deltaTime, minLight);
+    }
+
+    private void UpdateTriggerColliderSize()
+    {
+        triggerCollider.radius = torch.intensity * torchIntensityRadiusRatio;
     }
 }
