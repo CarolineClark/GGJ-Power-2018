@@ -8,10 +8,12 @@ public class LightController : MonoBehaviour {
 
     private Light torch;
     private CircleCollider2D triggerCollider;
+    private GameObject player;
 
 	void Start () {
         torch = GetComponent<Light>();
         triggerCollider = GetComponent<CircleCollider2D>();
+        player = GameObject.FindWithTag(Constants.PLAYER_TAG);
 	}
 	
 	void Update () 

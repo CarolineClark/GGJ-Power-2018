@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
     private Sprite leftSprite;
     private Sprite rightSprite;
 
+    private bool left = false;
+
 	void Start () 
     {
         DeathEvent.ListenForPlayerDeathEvent(Die);
@@ -26,14 +28,21 @@ public class PlayerController : MonoBehaviour {
 		rigidbody = GetComponent<Rigidbody2D>();
 		collider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
-
-        torch = transform.Find("Torch").gameObject;
-        SetDirection(false);
+        torch = GameObject.FindWithTag(Constants.TORCH_TAG);
+        SetDirection();
 	}
 
 	private void Update()
 	{
         cameraMain.transform.position = rigidbody.transform.position - cameraOffset;
+        SetDirection();
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+        if (collision.tag.Equals(Constants.MONSTER_TAG)) {
+            DieByMonster();
+        }
 	}
 
 	void FixedUpdate () 
@@ -48,26 +57,24 @@ public class PlayerController : MonoBehaviour {
 
     void FlipSpriteAndLightIfNeeded(float direction)
     {
-        bool left = direction < 0;
-        bool right = direction > 0;
-        if (left || right) {
-            SetDirection(left);
+        if (System.Math.Abs(direction) > 0.01) {
+            left = direction < 0;    
         }
     }
 
-    private void SetDirection(bool left) {
-        SetAnimation(left, 0);
-        SetTorchPosition(left);
+    private void SetDirection() {
+        SetAnimation(0);
+        SetTorchPosition();
     }
 
-    private void SetAnimation(bool left, float speed)
+    private void SetAnimation(float speed)
     {
         animator.SetBool(Constants.PLAYER_ANIMATION_LEFT, left);
         animator.SetBool(Constants.PLAYER_ANIMATION_RIGHT, !left);
         //animator.SetFloat(Constants.PLAYER_ANIMATION_SPEED, speed);
     }
 
-    private void SetTorchPosition(bool left) {
+    private void SetTorchPosition() {
         int multiplier = left ? -1 : 1;
         float x = transform.position.x + multiplier * torchOffset.x;
         float y = transform.position.y + torchOffset.y;
@@ -77,6 +84,12 @@ public class PlayerController : MonoBehaviour {
 
     private void Die(Hashtable h) 
     {
+        DeathEvent.EmitForGameManager();
+    }
+
+    private void DieByMonster()
+    {
+        Debug.Log("the monster killed you!");
         DeathEvent.EmitForGameManager();
     }
 

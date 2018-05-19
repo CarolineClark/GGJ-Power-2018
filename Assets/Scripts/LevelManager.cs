@@ -5,19 +5,19 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
 
     private PlayerManager playerManager;
-    private EnemyManager enemyManager;
+    private MonsterManager monsterManager;
     private EnvironmentManager environmentManager;
 
 	void Start () {
         playerManager = GetComponent<PlayerManager>();
-        enemyManager = GetComponent<EnemyManager>();
+        monsterManager = GetComponent<MonsterManager>();
         environmentManager = GetComponent<EnvironmentManager>();
 	}
 
     public void SetupScene(int level) 
     {
         playerManager.ResetPlayerPosition();
-        enemyManager.ResetEnemyPositions();
+        monsterManager.ResetPositions();
         environmentManager.ResetEnvironment();   
     }
 }
