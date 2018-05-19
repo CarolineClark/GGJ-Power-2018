@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate () 
     {
 		Vector2 move = Vector2.zero;
-		move.x = Input.GetAxis ("Horizontal");
-		move.y = Input.GetAxis ("Vertical");
+        move.x = Input.GetAxis (Constants.HORIZONTAL_AXIS);
+        move.y = Input.GetAxis (Constants.VERTICAL_AXIS);
 		rigidbody.velocity = move;
 
         // this might just be handled by the animator?
