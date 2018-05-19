@@ -15,4 +15,8 @@ public class Constants {
     public static string PLAYER_ANIMATION_SPEED = "speed";
 
     public static string PLAYER_TAG = "Player";
+
+    // events
+    public static string CHECKPOINT_COLLIDER = "CheckpointCollider";
+    public static string LEVEL_EVENT_KEY = "LevelEvent";
 }

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
 
 	private void Start()
 	{
+        EventManager.StartListening(Constants.LEVEL_EVENT_KEY, UpdateLevel);
         levelManager = GetComponent<LevelManager>();
         InitGame();
 	}
@@ -26,5 +27,10 @@ public class GameManager : MonoBehaviour {
 	void InitGame()
     {
         levelManager.SetupScene(level);
+    }
+
+    void UpdateLevel(Hashtable h) {
+        level = LevelEvent.ReadCheckpoint(h);
+        Debug.Log("updated level to: " + level);
     }
 }
