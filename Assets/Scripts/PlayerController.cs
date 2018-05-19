@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
     private SpriteRenderer spriteRenderer;
     private Camera cameraMain;
 
+    private GameObject torch;
+
     // to be worked out when you have spritesheets.
     private Animator animator;
     private Sprite leftSprite;
@@ -22,6 +24,9 @@ public class PlayerController : MonoBehaviour {
         cameraMain = Camera.main;
 		rigidbody = GetComponent<Rigidbody2D>();
 		collider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+
+        // TODO: Get light child object
 	}
 
 	private void Update()
@@ -36,27 +41,26 @@ public class PlayerController : MonoBehaviour {
         move.y = Input.GetAxis (Constants.VERTICAL_AXIS);
 		rigidbody.velocity = move;
 
-        // this might just be handled by the animator?
-        FlipSpriteIfNeeded(move.x);
+        FlipSpriteAndLightIfNeeded(move.x);
 	}
 
-    void FlipSpriteIfNeeded(float direction)
+    void FlipSpriteAndLightIfNeeded(float direction)
     {
-        //if (direction < 0 && spriteRenderer.sprite.Equals(rightSprite)) 
-        //{
-        //    spriteRenderer.sprite = leftSprite;
-        //} 
-        //else if (direction < 0 && spriteRenderer.sprite.Equals(leftSprite)) 
-        //{
-        //    spriteRenderer.sprite = rightSprite;
-        //}
+        if (direction < 0) 
+        {
+            SetAnimation(true, false, 0);
+        } 
+        else if (direction > 0)
+        {
+            SetAnimation(false, true, 0);
+        }
     }
 
     private void SetAnimation(bool left, bool right, float speed)
     {
         animator.SetBool(Constants.PLAYER_ANIMATION_LEFT, left);
         animator.SetBool(Constants.PLAYER_ANIMATION_RIGHT, right);
-        animator.SetFloat(Constants.PLAYER_ANIMATION_SPEED, speed);
+        //animator.SetFloat(Constants.PLAYER_ANIMATION_SPEED, speed);
     }
 
     private void Die(Hashtable h) 

@@ -9,8 +9,8 @@ public class Constants {
     public static string HORIZONTAL_AXIS = "Horizontal";
     public static string VERTICAL_AXIS = "Vertical";
 
-    public static string PLAYER_ANIMATION_LEFT = "PlayerLeft";
-    public static string PLAYER_ANIMATION_RIGHT = "PlayerRight";
+    public static string PLAYER_ANIMATION_LEFT = "left";
+    public static string PLAYER_ANIMATION_RIGHT = "right";
     public static string PLAYER_ANIMATION_IDLE = "PlayerIdle";
     public static string PLAYER_ANIMATION_SPEED = "speed";
 
