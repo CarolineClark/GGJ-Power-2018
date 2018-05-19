@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour {
         animator = GetComponent<Animator>();
 
         torch = transform.Find("Torch").gameObject;
+        SetDirection(false);
 	}
 
 	private void Update()
@@ -50,9 +51,13 @@ public class PlayerController : MonoBehaviour {
         bool left = direction < 0;
         bool right = direction > 0;
         if (left || right) {
-            SetAnimation(left, 0);
-            SetTorchPosition(left);
+            SetDirection(left);
         }
+    }
+
+    private void SetDirection(bool left) {
+        SetAnimation(left, 0);
+        SetTorchPosition(left);
     }
 
     private void SetAnimation(bool left, float speed)
