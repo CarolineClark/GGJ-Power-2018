@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
@@ -19,7 +18,8 @@ public class GameManager : MonoBehaviour {
 
 	private void Start()
 	{
-        EventManager.StartListening(Constants.LEVEL_EVENT_KEY, UpdateLevel);
+        LevelEvent.Listen(UpdateLevel);
+        DeathEvent.ListenForGameManagerDeathEvent(Die);
         levelManager = GetComponent<LevelManager>();
         InitGame();
 	}
@@ -32,5 +32,10 @@ public class GameManager : MonoBehaviour {
     void UpdateLevel(Hashtable h) {
         level = LevelEvent.ReadCheckpoint(h);
         Debug.Log("updated level to: " + level);
+    }
+
+    void Die(Hashtable h) {
+        Debug.Log("you died in GameManager");
+        InitGame();
     }
 }

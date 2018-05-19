@@ -1,12 +1,16 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.Events;
 
-public class LevelEvent {
+public class LevelEvent
+{
 
-	public static void EmitCheckpoint(int level)
+    public static void EmitCheckpoint(int level)
     {
         EventManager.TriggerEvent(Constants.LEVEL_EVENT_KEY, CreateLevelHashtable(level));
+    }
+
+    public static void Listen(UnityAction<Hashtable> listener) {
+        EventManager.StartListening(Constants.LEVEL_EVENT_KEY, listener);
     }
 
     public static int ReadCheckpoint(Hashtable h)

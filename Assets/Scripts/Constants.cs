@@ -19,4 +19,6 @@ public class Constants {
     // events
     public static string CHECKPOINT_COLLIDER = "CheckpointCollider";
     public static string LEVEL_EVENT_KEY = "LevelEvent";
+    public static string DEATH_EVENT_PLAYER_KEY = "DeathEventPlayer";
+    public static string DEATH_EVENT_GAMEMANAGER_KEY = "DeathEventGameManager";
 }

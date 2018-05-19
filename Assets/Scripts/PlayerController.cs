@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
@@ -18,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Start () 
     {
+        DeathEvent.ListenForPlayerDeathEvent(Die);
         cameraMain = Camera.main;
 		rigidbody = GetComponent<Rigidbody2D>();
 		collider = GetComponent<BoxCollider2D>();
@@ -56,5 +56,14 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool(Constants.PLAYER_ANIMATION_LEFT, left);
         animator.SetBool(Constants.PLAYER_ANIMATION_RIGHT, right);
         animator.SetFloat(Constants.PLAYER_ANIMATION_SPEED, speed);
+    }
+
+    private void Die(Hashtable h) {
+        PlayDeathAnimation();
+        DeathEvent.EmitForGameManager();
+    }
+
+    private void PlayDeathAnimation() {
+        Debug.Log("Playing death animation in player");
     }
 }
