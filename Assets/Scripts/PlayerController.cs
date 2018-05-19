@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public Vector3 cameraOffset;
+    public Vector3 torchOffset;
 
 	private Rigidbody2D rigidbody;
 	private BoxCollider2D collider;
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 		collider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
 
-        // TODO: Get light child object
+        torch = transform.Find("Torch").gameObject;
 	}
 
 	private void Update()
@@ -46,21 +47,27 @@ public class PlayerController : MonoBehaviour {
 
     void FlipSpriteAndLightIfNeeded(float direction)
     {
-        if (direction < 0) 
-        {
-            SetAnimation(true, false, 0);
-        } 
-        else if (direction > 0)
-        {
-            SetAnimation(false, true, 0);
+        bool left = direction < 0;
+        bool right = direction > 0;
+        if (left || right) {
+            SetAnimation(left, 0);
+            SetTorchPosition(left);
         }
     }
 
-    private void SetAnimation(bool left, bool right, float speed)
+    private void SetAnimation(bool left, float speed)
     {
         animator.SetBool(Constants.PLAYER_ANIMATION_LEFT, left);
-        animator.SetBool(Constants.PLAYER_ANIMATION_RIGHT, right);
+        animator.SetBool(Constants.PLAYER_ANIMATION_RIGHT, !left);
         //animator.SetFloat(Constants.PLAYER_ANIMATION_SPEED, speed);
+    }
+
+    private void SetTorchPosition(bool left) {
+        int multiplier = left ? -1 : 1;
+        float x = transform.position.x + multiplier * torchOffset.x;
+        float y = transform.position.y + torchOffset.y;
+        float z = transform.position.z + torchOffset.z;
+        torch.transform.position = new Vector3(x, y, z);
     }
 
     private void Die(Hashtable h) 
