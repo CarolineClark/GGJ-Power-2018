@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour {
     public Vector3 cameraOffset;
     public Vector3 torchOffset;
 
+    public Material leftMaterial;
+    public Material rightMaterial;
+
 	private Rigidbody2D rigidbody;
 	private BoxCollider2D collider;
     private SpriteRenderer spriteRenderer;
@@ -101,5 +104,14 @@ public class PlayerController : MonoBehaviour {
 
     private void PlayFallingDeathAnimation() {
         Debug.Log("Playing falling death animation in player");
+    }
+
+    private void TransitionMaterialLeftToRight() {
+        spriteRenderer.material.Lerp(leftMaterial, rightMaterial, Time.deltaTime);
+    }
+
+    private void TransitionMaterialRightToLeft()
+    {
+        spriteRenderer.material.Lerp(rightMaterial, leftMaterial, Time.deltaTime);
     }
 }

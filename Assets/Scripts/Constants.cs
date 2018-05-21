@@ -19,6 +19,8 @@ public class Constants {
     public static string TORCH_TAG = "Torch";
     public static string MONSTER_TAG = "Monster";
 
+    public static string STALACTITE_WOBBLE_ANIM = "wobble";
+
     // events
     public static string CHECKPOINT_COLLIDER = "CheckpointCollider";
     public static string LEVEL_EVENT_KEY = "LevelEvent";
