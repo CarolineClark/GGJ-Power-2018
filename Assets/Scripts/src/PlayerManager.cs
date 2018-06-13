@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
     GameObject playerGameObject;
     public Vector2 startPosition;
 
-	void Start () {
+	void Awake () {
         playerGameObject = GameObject.FindWithTag(Constants.PLAYER_TAG);
 	}
 

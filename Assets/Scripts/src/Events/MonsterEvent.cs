@@ -16,11 +16,7 @@ public class MonsterEvent
 
     public static float ReadDistance(Hashtable h)
     {
-        if (h != null && h.ContainsKey(distanceKey))
-        {
-            return (float)h[distanceKey];
-        }
-        throw new System.ArgumentException("You have fed the wrong hashtable into this event");
+        return ReadEvent.ReadKeyFromHashtable<float>(h, distanceKey);
     }
 
     private static Hashtable CreateDistanceHashtable(float distance)

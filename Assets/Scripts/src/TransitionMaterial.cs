@@ -9,8 +9,8 @@ public class TransitionMaterial : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    //public static void TransitionMaterial(SpriteRenderer renderer, Material material1, Material material2)
+    //{
+    //    spriteRenderer.material.Lerp(material1, material2, lerp);
+    //}
 }

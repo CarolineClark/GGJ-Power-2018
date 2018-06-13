@@ -7,7 +7,7 @@ public class MonsterManager : MonoBehaviour {
     public GameObject monster;
     private Dictionary<GameObject, Vector2> spawnedMonsters;
 
-	public void Start()
+	public void Awake()
 	{
         spawnedMonsters = new Dictionary<GameObject, Vector2>();
         Spawn(); 

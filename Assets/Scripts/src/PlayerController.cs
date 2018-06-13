@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
     {
         DeathEvent.ListenForPlayerDeathEvent(Die);
         DeathEvent.ListenForPlayerFallingEvent(DieByFalling);
+        PlayerMoveEvent.Listen(MoveByEvent);
         cameraMain = Camera.main;
 		rigidbody = GetComponent<Rigidbody2D>();
 		collider = GetComponent<BoxCollider2D>();
@@ -48,15 +49,27 @@ public class PlayerController : MonoBehaviour {
         }
 	}
 
-	void FixedUpdate () 
-    {
-		Vector2 move = Vector2.zero;
-        move.x = Input.GetAxis (Constants.HORIZONTAL_AXIS);
-        move.y = Input.GetAxis (Constants.VERTICAL_AXIS);
-		rigidbody.velocity = move;
+	//void FixedUpdate () 
+ //   {
+ //       Vector2 move = MoveWithController();
+ //       FlipSpriteAndLightIfNeeded(move.x);
+	//}
 
-        FlipSpriteAndLightIfNeeded(move.x);
-	}
+    //private Vector2 MoveWithController()
+    //{
+    //    Vector2 move = Vector2.zero;
+    //    move.x = Input.GetAxis(Constants.HORIZONTAL_AXIS);
+    //    move.y = Input.GetAxis(Constants.VERTICAL_AXIS);
+    //    rigidbody.velocity = move;
+    //    return move;
+    //}
+
+    private void MoveByEvent(Hashtable h)
+    {
+        rigidbody.velocity = PlayerMoveEvent.Read(h);
+        FlipSpriteAndLightIfNeeded(rigidbody.velocity.x);
+
+    }
 
     void FlipSpriteAndLightIfNeeded(float direction)
     {

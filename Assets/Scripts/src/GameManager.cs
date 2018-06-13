@@ -16,15 +16,15 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
-	private void Start()
+	void Start()
 	{
         LevelEvent.Listen(UpdateLevel);
         DeathEvent.ListenForGameManagerDeathEvent(Die);
         levelManager = GetComponent<LevelManager>();
-        InitGame();
+        RestartGame();
 	}
 
-	void InitGame()
+	void RestartGame()
     {
         levelManager.SetupScene(level);
     }
@@ -36,6 +36,6 @@ public class GameManager : MonoBehaviour {
 
     void Die(Hashtable h) {
         Debug.Log("you died in GameManager");
-        InitGame();
+        RestartGame();
     }
 }

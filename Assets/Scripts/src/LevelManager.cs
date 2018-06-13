@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour {
     private MonsterManager monsterManager;
     private EnvironmentManager environmentManager;
 
-	void Start () {
+	void Awake () {
         playerManager = GetComponent<PlayerManager>();
         monsterManager = GetComponent<MonsterManager>();
         environmentManager = GetComponent<EnvironmentManager>();

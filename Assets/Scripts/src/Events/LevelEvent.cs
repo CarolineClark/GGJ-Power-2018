@@ -15,11 +15,7 @@ public class LevelEvent
 
     public static int ReadCheckpoint(Hashtable h)
     {
-        if (h != null && h.ContainsKey(Constants.LEVEL_EVENT_KEY))
-        {
-            return (int)h[Constants.LEVEL_EVENT_KEY];
-        }
-        throw new System.ArgumentException("You have fed the wrong hashtable into this event");
+        return ReadEvent.ReadKeyFromHashtable<int>(h, Constants.LEVEL_EVENT_KEY);
     }
 
     private static Hashtable CreateLevelHashtable(int level)

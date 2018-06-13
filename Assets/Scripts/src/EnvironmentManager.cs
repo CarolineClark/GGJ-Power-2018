@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnvironmentManager : MonoBehaviour {
 
-	void Start () {
+	void Awake () {
         // find dynamic environment by tags and store a reference to them
 }
 
