@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestPlayerInput {
 	
-	public void TriggerPlayerInput() {
+	public void Trigger() {
         PlayerMoveEvent.TriggerEvent(new Vector2(1, 0));
 	}
 }

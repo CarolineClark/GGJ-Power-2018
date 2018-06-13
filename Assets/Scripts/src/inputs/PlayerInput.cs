@@ -2,7 +2,7 @@
 
 public class PlayerInput : MonoBehaviour {
 	
-	void FixedUpdate () 
+	public void Trigger() 
     {
         Vector2 move = new Vector2(
             Input.GetAxis(Constants.HORIZONTAL_AXIS), 

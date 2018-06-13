@@ -2,7 +2,6 @@
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-
     public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
     private LevelManager levelManager;                       //Store a reference to our BoardManager which will set up the level.
     private int level = 0;                                  //Current level number, expressed in game as "Day 1".
@@ -21,6 +20,7 @@ public class GameManager : MonoBehaviour {
         LevelEvent.Listen(UpdateLevel);
         DeathEvent.ListenForGameManagerDeathEvent(Die);
         levelManager = GetComponent<LevelManager>();
+
         RestartGame();
 	}
 
